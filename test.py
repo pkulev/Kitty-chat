@@ -43,3 +43,16 @@ if not host == remote_ip:
 
 s.connect((remote_ip, port))
 die('Socket connected to ' + remote_ip + ':' + str(port))
+
+while True:
+    try:
+        message = raw_input("-->")
+        s.sendall(message)
+    except socket.error:
+        die("Send failed")
+        sys.exit()
+    die('Message send successfully')
+    reply = s.recv(4096)
+    print(reply)
+
+s.close()
